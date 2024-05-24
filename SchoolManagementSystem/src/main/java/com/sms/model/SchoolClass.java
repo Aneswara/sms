@@ -8,19 +8,19 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
 
 @Entity
 public class SchoolClass {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE ,generator = "user_seq")
+	@SequenceGenerator(allocationSize = 10001,name = "user_seq")
 	private Long classId;
 	private String className;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "sections_id")
-	private List<Section> sections;
+	@OneToMany( mappedBy = "schoolClass",cascade = CascadeType.ALL ,fetch = FetchType.LAZY)
+	private List<Section> section;
 	private String status;
 
 	/**
@@ -55,14 +55,14 @@ public class SchoolClass {
 	 * @return the sections
 	 */
 	public List<Section> getsections() {
-		return sections;
+		return section;
 	}
 
 	/**
 	 * @param sections the sections to set
 	 */
 	public void setsections(List<Section> sections) {
-		this.sections = sections;
+		this.section = sections;
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class SchoolClass {
 	}
 
 	public String toString() {
-		return "SchoolClass [classId=" + classId + ", className=" + className + ", sections=" + sections + ", status="
+		return "SchoolClass [classId=" + classId + ", className=" + className + ", sections=" + section + ", status="
 				+ status + "]";
 	}
 

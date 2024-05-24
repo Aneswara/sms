@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sms.model.Section;
-import com.sms.serviceimpl.SectionServiceImpl;
+import com.sms.service.SectionService;
 
 @RestController
 @RequestMapping("api/section/v1")
@@ -23,24 +23,22 @@ public class SectionController {
 
 	Logger logger = LoggerFactory.getLogger(SectionController.class);
 	@Autowired
-	private SectionServiceImpl sectionServiceImpl;
+	private SectionService sectionService;
 
 	@PostMapping("/createSection")
 	public ResponseEntity<Section> createSection(Section section) {
 		try {
-			section = sectionServiceImpl.createSection(section);
-			return new ResponseEntity<Section>(section, HttpStatus.CREATED);
+			section = sectionService.createSection(section);
 		} catch (Exception e) {
 			logger.error("error created in section creation");
-			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
-
+		return new ResponseEntity<Section>(section, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/updateSection")
 	public ResponseEntity<Section> updateSection(Section section) {
 		try {
-			section = sectionServiceImpl.updateSection(section);
+			section = sectionService.updateSection(section);
 			return new ResponseEntity<Section>(section, HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error("error created in section updation");
@@ -52,7 +50,7 @@ public class SectionController {
 	@GetMapping("/findAllSections")
 	public ResponseEntity<List<Section>> findAllSections() {
 		try {
-			List<Section> section = sectionServiceImpl.findAllSections();
+			List<Section> section = sectionService.findAllSections();
 			return new ResponseEntity<List<Section>>(section, HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error("error created in find all sections");
@@ -64,7 +62,7 @@ public class SectionController {
 	@DeleteMapping("/deleteSection")
 	public ResponseEntity<Section> deleteSection(Long sectionId) {
 		try {
-			Section section = sectionServiceImpl.deleteSection(sectionId);
+			Section section = sectionService.deleteSection(sectionId);
 			return new ResponseEntity<Section>(section, HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error("error created in section deletion");

@@ -21,6 +21,7 @@ public class Section {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="class_id")
 	private SchoolClass schoolClass;
+	
 	/**
 	 * @return the sectionId
 	 */

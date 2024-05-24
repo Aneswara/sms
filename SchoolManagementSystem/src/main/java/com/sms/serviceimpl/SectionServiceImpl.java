@@ -24,47 +24,42 @@ public class SectionServiceImpl implements SectionService {
 	public Section createSection(Section section) {
 		try {
 			 section = sectionRepository.save(section);
-			 return section;
 		} catch (Exception e) {
 			logger.error("section is not created");
-			return null;
 		}
-		
+		return section;
 	}
 
 	
 	public Section updateSection(Section section) {
 		try {
 			section=sectionRepository.save(section);
-			return section;
 		} catch (Exception e) {
 			logger.error("section is not updated");
-			return null;
 		}
-		
+		return section;
 	}
 
 	
 	public List<Section> findAllSections() {
+		List<Section> section=null;
 		try {
-			List<Section> section=sectionRepository.findAll();
-			return section;
+			 section=sectionRepository.findAll();
 		} catch (Exception e) {
 			logger.error("sections not found");
-			return null;
 		}
-		
+		return section;
 	}
 
 	
 	public Section deleteSection(Long sectionId) {
+		Section section=null;
 		try {
-			Section section=sectionRepository.deleteBySectionId(sectionId);
-			return section;
+			 section=sectionRepository.deleteBySectionId(sectionId);
 		} catch (Exception e) {
 			logger.error("section is not deleted");
-			return null;
 		}
+		return section;
 	}
 
 }

@@ -61,8 +61,8 @@ public class SchoolController {
 	@GetMapping("/findAllSchools")
 	public ResponseEntity<List<School>> findAll() {
 		try {
-			List<School> find = schoolService.findAllSchools();
-			return new ResponseEntity<List<School>>(find, HttpStatus.OK);
+			List<School> schoolList = schoolService.findAllSchools();
+			return new ResponseEntity<List<School>>(schoolList, HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error("error created in school findAll");
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -73,8 +73,8 @@ public class SchoolController {
 	@DeleteMapping("/deleteSchool")
 	public ResponseEntity<School> deleteSchool(@RequestParam Long SchoolId) {
 		try {
-			School delete = schoolService.deleteSchool(SchoolId);
-			return new ResponseEntity<School>(delete, HttpStatus.OK);
+			School school = schoolService.deleteSchool(SchoolId);
+			return new ResponseEntity<School>(school, HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error("error created in school deletion");
 			return new ResponseEntity<>(null, HttpStatus.TOO_MANY_REQUESTS);
