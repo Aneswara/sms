@@ -24,6 +24,7 @@ public class SectionServiceImpl implements SectionService {
 	public Section createSection(Section section) {
 		try {
 			 section = sectionRepository.save(section);
+			 logger.warn(" ser cr   ->" + section.toString());
 		} catch (Exception e) {
 			logger.error("section is not created");
 		}
@@ -34,6 +35,7 @@ public class SectionServiceImpl implements SectionService {
 	public Section updateSection(Section section) {
 		try {
 			section=sectionRepository.save(section);
+			logger.warn("  ser ud  ->" + section.toString());
 		} catch (Exception e) {
 			logger.error("section is not updated");
 		}

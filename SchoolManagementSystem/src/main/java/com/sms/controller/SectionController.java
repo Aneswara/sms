@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sms.model.Section;
@@ -26,9 +28,10 @@ public class SectionController {
 	private SectionService sectionService;
 
 	@PostMapping("/createSection")
-	public ResponseEntity<Section> createSection(Section section) {
+	public ResponseEntity<Section> createSection(@RequestBody Section section) {
 		try {
 			section = sectionService.createSection(section);
+			logger.warn(" con cr   ->" + section.toString());
 		} catch (Exception e) {
 			logger.error("error created in section creation");
 		}
@@ -36,9 +39,10 @@ public class SectionController {
 	}
 
 	@PutMapping("/updateSection")
-	public ResponseEntity<Section> updateSection(Section section) {
+	public ResponseEntity<Section> updateSection(@RequestBody Section section) {
 		try {
 			section = sectionService.updateSection(section);
+			logger.warn("con ud    ->" + section.toString());
 			return new ResponseEntity<Section>(section, HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error("error created in section updation");
@@ -60,7 +64,7 @@ public class SectionController {
 	}
 
 	@DeleteMapping("/deleteSection")
-	public ResponseEntity<Section> deleteSection(Long sectionId) {
+	public ResponseEntity<Section> deleteSection(@RequestParam Long sectionId) {
 		try {
 			Section section = sectionService.deleteSection(sectionId);
 			return new ResponseEntity<Section>(section, HttpStatus.OK);

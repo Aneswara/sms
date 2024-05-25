@@ -2,6 +2,8 @@ package com.sms.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -20,6 +22,7 @@ public class SchoolClass {
 	private Long classId;
 	private String className;
 	@OneToMany( mappedBy = "schoolClass",cascade = CascadeType.ALL ,fetch = FetchType.LAZY)
+	@JsonManagedReference("schoolClass-section")
 	private List<Section> section;
 	private String status;
 

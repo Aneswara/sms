@@ -1,5 +1,7 @@
 package com.sms.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -20,6 +22,7 @@ public class Section {
 	private String Status;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="class_id")
+	@JsonBackReference("schoolClass-section")
 	private SchoolClass schoolClass;
 	
 	/**
