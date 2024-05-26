@@ -6,43 +6,41 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sms.dao.SectionRepository;
 import com.sms.model.Section;
 import com.sms.service.SectionService;
 
-import jakarta.transaction.Transactional;
 
 @Service
-@Transactional
 public class SectionServiceImpl implements SectionService {
 
 	Logger logger=LoggerFactory.getLogger(SectionServiceImpl.class);
 	@Autowired
 	private SectionRepository sectionRepository;
 	
+	@Transactional
 	public Section createSection(Section section) {
 		try {
 			 section = sectionRepository.save(section);
-			 logger.warn(" ser cr   ->" + section.toString());
 		} catch (Exception e) {
 			logger.error("section is not created");
 		}
 		return section;
 	}
 
-	
+	@Transactional
 	public Section updateSection(Section section) {
 		try {
 			section=sectionRepository.save(section);
-			logger.warn("  ser ud  ->" + section.toString());
 		} catch (Exception e) {
 			logger.error("section is not updated");
 		}
 		return section;
 	}
 
-	
+	@Transactional
 	public List<Section> findAllSections() {
 		List<Section> section=null;
 		try {
@@ -53,15 +51,15 @@ public class SectionServiceImpl implements SectionService {
 		return section;
 	}
 
-	
+	@Transactional
 	public Section deleteSection(Long sectionId) {
-		Section section=null;
 		try {
-			 section=sectionRepository.deleteBySectionId(sectionId);
+			Section section=sectionRepository.deleteBySectionId(sectionId);
+			 return section;
 		} catch (Exception e) {
 			logger.error("section is not deleted");
+			return null;
 		}
-		return section;
 	}
 
 }

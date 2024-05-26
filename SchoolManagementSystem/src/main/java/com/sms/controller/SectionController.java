@@ -31,7 +31,6 @@ public class SectionController {
 	public ResponseEntity<Section> createSection(@RequestBody Section section) {
 		try {
 			section = sectionService.createSection(section);
-			logger.warn(" con cr   ->" + section.toString());
 		} catch (Exception e) {
 			logger.error("error created in section creation");
 		}
@@ -42,7 +41,6 @@ public class SectionController {
 	public ResponseEntity<Section> updateSection(@RequestBody Section section) {
 		try {
 			section = sectionService.updateSection(section);
-			logger.warn("con ud    ->" + section.toString());
 			return new ResponseEntity<Section>(section, HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error("error created in section updation");
@@ -65,10 +63,13 @@ public class SectionController {
 
 	@DeleteMapping("/deleteSection")
 	public ResponseEntity<Section> deleteSection(@RequestParam Long sectionId) {
+		Section section = null;
 		try {
-			Section section = sectionService.deleteSection(sectionId);
+			section = sectionService.deleteSection(sectionId);
+			logger.warn("con dl t->" + section.toString());
 			return new ResponseEntity<Section>(section, HttpStatus.OK);
 		} catch (Exception e) {
+			logger.warn("con dl e->" + section.toString());
 			logger.error("error created in section deletion");
 			return new ResponseEntity<>(null, HttpStatus.TOO_MANY_REQUESTS);
 		}

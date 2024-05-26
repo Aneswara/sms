@@ -7,12 +7,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sms.dao.SchoolRepository;
 import com.sms.model.School;
 import com.sms.service.SchoolService;
 
-import jakarta.transaction.Transactional;
 
 @Service
 public class SchoolServiceImpl implements SchoolService {
