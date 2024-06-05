@@ -60,6 +60,18 @@ public class SectionController {
 		}
 
 	}
+	
+	@GetMapping("/findBySectionId")
+	public ResponseEntity<Section> findBySectionId(@RequestParam Long sectionId) {
+		Section section=null;
+		try {
+			section=sectionService.findBySectionId(sectionId);
+		} catch (Exception e) {
+			logger.error("error created in finding section by id");
+		}
+		return new ResponseEntity<Section>(section, HttpStatus.OK);
+	}
+	
 
 	@DeleteMapping("/deleteSection")
 	public ResponseEntity<Section> deleteSection(@RequestParam Long sectionId) {

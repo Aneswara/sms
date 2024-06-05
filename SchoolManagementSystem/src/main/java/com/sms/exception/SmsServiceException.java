@@ -1,8 +1,21 @@
 package com.sms.exception;
 
-import org.springframework.web.bind.annotation.ControllerAdvice;
+public class SmsServiceException extends SmsException {
 
-@ControllerAdvice
-public class SmsServiceException extends RuntimeException {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5074615456169093589L;
 
+	public SmsServiceException(String errorCode, String message) {
+		super(errorCode, message);
+	}
+
+	public SmsServiceException(String errorCode, String message, Throwable cause) {
+		super(errorCode, message, cause);
+	}
+
+	public SmsServiceException(Throwable cause) {
+		super(cause);
+	}
 }

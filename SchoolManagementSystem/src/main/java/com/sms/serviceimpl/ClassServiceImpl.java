@@ -12,7 +12,6 @@ import com.sms.dao.ClassRepository;
 import com.sms.model.SchoolClass;
 import com.sms.service.ClassService;
 
-
 @Service
 public class ClassServiceImpl implements ClassService {
 
@@ -55,20 +54,23 @@ public class ClassServiceImpl implements ClassService {
 
 	@Transactional
 	public SchoolClass deleteClass(Long classId) {
+		SchoolClass schoolClass = null;
 		try {
-			SchoolClass schoolClass = classRepository.deleteByClassId(classId);
-			return schoolClass;
+			schoolClass = this.findByClassId(classId);
+			if (schoolClass != null) {
+				classRepository.deleteByClassId(classId);
+			}
 		} catch (Exception e) {
 			logger.error("class is not delete");
-			return null;
 		}
+		return schoolClass;
 	}
 
 	@Transactional
 	public SchoolClass findByClassId(Long classId) {
-		SchoolClass schoolClass=null;
+		SchoolClass schoolClass = null;
 		try {
-			 schoolClass=classRepository.findByClassId(classId);
+			schoolClass = classRepository.findByClassId(classId);
 		} catch (Exception e) {
 			logger.error("class not found");
 		}

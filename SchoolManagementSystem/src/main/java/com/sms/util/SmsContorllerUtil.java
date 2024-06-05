@@ -7,10 +7,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 @ControllerAdvice
 public class SmsContorllerUtil {
 
-	public ServiceResponse successStatus(ServiceResponse serviceResponse, String errorCode, String statusMessage) {
+	public ServiceResponse successStatus(ServiceResponse serviceResponse, String statusMessage) {
 		serviceResponse.setStatus("200");
 		serviceResponse.setStatusMessage(statusMessage);
-		serviceResponse.setErrorCode(errorCode);
 		return serviceResponse;
 	}
 

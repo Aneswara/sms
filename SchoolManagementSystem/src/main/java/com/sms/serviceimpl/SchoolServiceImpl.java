@@ -13,7 +13,6 @@ import com.sms.dao.SchoolRepository;
 import com.sms.model.School;
 import com.sms.service.SchoolService;
 
-
 @Service
 public class SchoolServiceImpl implements SchoolService {
 
@@ -64,22 +63,25 @@ public class SchoolServiceImpl implements SchoolService {
 
 	@Transactional
 	public School deleteSchool(Long SchoolId) {
+		School school = null;
 		try {
-			School school = schoolRepo.deleteBySchoolId(SchoolId);
-			return school;
+			school = this.findBySchoolId(SchoolId);
+			if (school != null) {
+				schoolRepo.deleteBySchoolId(SchoolId);
+			}
 		} catch (Exception e) {
 			logger.error("school is not deleted");
-			return null;
 		}
+		return school;
 	}
 
 	@Transactional
 	public School findBySchoolId(Long schoolId) {
 		School school = null;
 		try {
-			Optional<School> schoolOptObj=schoolRepo.findById(schoolId);
-			if(schoolOptObj.isPresent()) {
-				school= schoolOptObj.get();
+			Optional<School> schoolOptObj = schoolRepo.findById(schoolId);
+			if (schoolOptObj.isPresent()) {
+				school = schoolOptObj.get();
 			}
 		} catch (Exception e) {
 			logger.error("school not found");

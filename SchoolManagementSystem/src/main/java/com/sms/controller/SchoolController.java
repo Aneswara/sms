@@ -71,9 +71,9 @@ public class SchoolController {
 	}
 
 	@DeleteMapping("/deleteSchool")
-	public ResponseEntity<School> deleteSchool(@RequestParam Long SchoolId) {
+	public ResponseEntity<School> deleteSchool(@RequestParam Long schoolId) {
 		try {
-			School school = schoolService.deleteSchool(SchoolId);
+			School school = schoolService.deleteSchool(schoolId);
 			return new ResponseEntity<School>(school, HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error("error created in school deletion");

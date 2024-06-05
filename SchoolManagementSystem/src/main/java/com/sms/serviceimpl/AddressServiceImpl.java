@@ -1,6 +1,7 @@
 package com.sms.serviceimpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sms.dao.AddressRepository;
+import com.sms.exception.SmsServiceException;
 import com.sms.model.Address;
 import com.sms.service.AddressService;
 
@@ -21,14 +23,14 @@ public class AddressServiceImpl implements AddressService {
 	AddressRepository addressRepository;
 	
 	@Transactional
-	public Address createAddress(Address address) {
+	public Address createAddress(Address address) throws SmsServiceException {
 		try {
 			address=addressRepository.save(address);
-			return address;
 		} catch (Exception e) {
 			logger.error("address is not created");
-			return null;
+			throw new SmsServiceException("", "", e.getCause());
 		}
+		return address;
 	}
 
 	@Transactional
@@ -55,13 +57,30 @@ public class AddressServiceImpl implements AddressService {
 
 	@Transactional
 	public Address deleteByAddressId(Long addressId) {
+		Address address=null;
 		try {
-			Address address=addressRepository.deleteByAddressId(addressId);
-			return address;
+			address=this.findByAddressId(addressId);
+			if(address !=null) {
+				addressRepository.deleteByAddressId(addressId);
+			}
 		} catch (Exception e) {
 			logger.error("address is not deleted");
-			return null;
 		}
+		return address;
+	}
+
+	@Transactional
+	public Address findByAddressId(Long addressId) {
+		Address address=null;
+		try {
+			Optional<Address> addressOpt=addressRepository.findById(addressId);
+			if(addressOpt.isPresent()) {
+				address=addressOpt.get();
+			}
+		} catch (Exception e) {
+			logger.error("address is not found");
+		}
+		return address;
 	}
 
 }

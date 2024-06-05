@@ -62,4 +62,10 @@ public class SectionServiceImpl implements SectionService {
 		}
 	}
 
+	@Transactional
+	public Section findBySectionId(Long sectionId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

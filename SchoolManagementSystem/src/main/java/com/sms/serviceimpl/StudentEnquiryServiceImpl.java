@@ -69,7 +69,10 @@ public class StudentEnquiryServiceImpl implements StudentEnquiryService{
 	public StudentEnquiry deleteStudentEnquiry(Long studentId) {
 		StudentEnquiry studentEnquiry = null;
 		try {
-			studentEnquiry=studentEnquiryRepository.deleteByStudentId(studentId);
+			studentEnquiry=this.findById(studentId);
+			if(studentEnquiry!=null) {
+				studentEnquiryRepository.deleteByStudentId(studentId);
+			}
 		} catch (Exception e) {
 			logger.error("studentEnquiry is not deleted");
 		}

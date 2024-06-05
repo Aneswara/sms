@@ -1,17 +1,23 @@
 package com.sms.exception;
 
-public class SmsDaoException extends Exception {
+/**
+ * 
+ * @author Aneswara reddy
+ *
+ */
+public class SmsDaoException extends SmsException {
 
-	public SmsDaoException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public SmsDaoException(String errorCode, String message, Throwable cause) {
+		super(errorCode, message, cause);
 	}
 
-	public SmsDaoException(String message, Throwable cause) {
-		super(message, cause);
-	}
-
-	public SmsDaoException(String message) {
-		super(message);
+	public SmsDaoException(String errorCode, String message) {
+		super(errorCode, message);
 	}
 
 	public SmsDaoException(Throwable cause) {

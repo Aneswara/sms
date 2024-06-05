@@ -12,5 +12,7 @@ public interface SectionService {
 	
 	public List<Section> findAllSections();
 	
+	public Section findBySectionId(Long sectionId);
+	
 	public Section deleteSection(Long sectionId);
 }
